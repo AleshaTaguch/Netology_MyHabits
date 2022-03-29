@@ -14,17 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let habitsNavigationController: UINavigationController = {
         let habitsNavigationController = UINavigationController()
-        habitsNavigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "house"), tag: 0)
-        habitsNavigationController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
-        //habitsNavigationController.setViewControllers([FeedViewController()], animated: true)
+        habitsNavigationController.tabBarItem = UITabBarItem(title: Consts.TabPage.habitPageName, image: UIImage(systemName: "rectangle.grid.1x2"), tag: 0)
+        habitsNavigationController.tabBarItem.selectedImage = UIImage(systemName: "rectangle.grid.1x2.fill")
+        habitsNavigationController.setViewControllers([HabitsViewController()], animated: true)
         return habitsNavigationController
     }()
     
     let infoNavigationController: UINavigationController = {
         let infoNavigationController = UINavigationController()
-        infoNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 0)
-        infoNavigationController.tabBarItem.selectedImage = UIImage(systemName: "person.fill")
-        //infoNavigationController.setViewControllers([LoginViewController()], animated: true)
+        infoNavigationController.tabBarItem = UITabBarItem(title: Consts.TabPage.infoPageName, image: UIImage(systemName: "info.circle"), tag: 1)
+        infoNavigationController.tabBarItem.selectedImage = UIImage(systemName: "info.circle.fill")
+        infoNavigationController.setViewControllers([InfoViewController()], animated: true)
         return infoNavigationController
     }()
 
