@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         rootTabBarController.tabBar.backgroundColor = .systemGray6
         rootTabBarController.tabBar.layer.borderWidth = 0.5
         rootTabBarController.tabBar.layer.borderColor = UIColor.lightGray.cgColor
+        UITabBar.appearance().tintColor = UIColor.purple
         return rootTabBarController
     }()
     

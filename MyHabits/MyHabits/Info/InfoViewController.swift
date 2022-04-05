@@ -1,10 +1,3 @@
-//
-//  InfoViewController.swift
-//  MyHabits
-//
-//  Created by tertyshniy on 29.03.2022.
-//
-
 import UIKit
 
 class InfoViewController: UIViewController {
@@ -42,7 +35,7 @@ class InfoViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        
         scrollView.contentSize = CGSize(width: self.view.safeAreaLayoutGuide.layoutFrame.size.width
                                       ,height: 22 + 24 + 16 + self.contentView.infoLabel.frame.size.height + 16)
     }

@@ -1,10 +1,3 @@
-//
-//  InfoContentView.swift
-//  MyHabits
-//
-//  Created by tertyshniy on 29.03.2022.
-//
-
 import UIKit
 
 class InfoContentView: UIView {

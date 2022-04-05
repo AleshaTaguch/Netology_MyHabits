@@ -6,6 +6,16 @@ struct Consts {
         static let habitPageName: String = "Привычки"
         static let habitPageButtomTitle: String = "Сегодня"
     }
+    struct HobitsCollection {
+        static let topMargin: CGFloat = 12
+        static let leftMargin: CGFloat = 16
+        static let rightMargin: CGFloat = 16
+        static let buttomMargin: CGFloat = 12
+        static let lineSpacing: CGFloat = 12
+        static let interitemSpacing: CGFloat = 12
+        //static let countColumns: Int = 3
+        
+    }
     
     static let intoText: String =
         """

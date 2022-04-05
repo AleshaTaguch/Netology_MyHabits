@@ -18,6 +18,12 @@
 		595FB1EF27F3616800E4E328 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB1EE27F3616800E4E328 /* Constants.swift */; };
 		595FB1F127F391F600E4E328 /* InfoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB1F027F391F600E4E328 /* InfoContentView.swift */; };
 		595FB1F327F3936E00E4E328 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB1F227F3936E00E4E328 /* Extentions.swift */; };
+		595FB1F527F3BBA500E4E328 /* HabitEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB1F427F3BBA500E4E328 /* HabitEditViewController.swift */; };
+		595FB1FB27FA440300E4E328 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB1FA27FA440300E4E328 /* Storage.swift */; };
+		595FB1FD27FA459000E4E328 /* HobitsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB1FC27FA459000E4E328 /* HobitsCollectionViewCell.swift */; };
+		595FB1FF27FB594700E4E328 /* HobitsProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB1FE27FB594700E4E328 /* HobitsProgressCollectionViewCell.swift */; };
+		595FB20127FCD17400E4E328 /* HabitEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB20027FCD17400E4E328 /* HabitEditView.swift */; };
+		595FB20327FCDF2E00E4E328 /* HabitsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB20227FCDF2E00E4E328 /* HabitsCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +40,12 @@
 		595FB1EE27F3616800E4E328 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		595FB1F027F391F600E4E328 /* InfoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoContentView.swift; sourceTree = "<group>"; };
 		595FB1F227F3936E00E4E328 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		595FB1F427F3BBA500E4E328 /* HabitEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitEditViewController.swift; sourceTree = "<group>"; };
+		595FB1FA27FA440300E4E328 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		595FB1FC27FA459000E4E328 /* HobitsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobitsCollectionViewCell.swift; sourceTree = "<group>"; };
+		595FB1FE27FB594700E4E328 /* HobitsProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobitsProgressCollectionViewCell.swift; sourceTree = "<group>"; };
+		595FB20027FCD17400E4E328 /* HabitEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitEditView.swift; sourceTree = "<group>"; };
+		595FB20227FCDF2E00E4E328 /* HabitsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,9 +78,11 @@
 		595FB1D027F3495200E4E328 /* MyHabits */ = {
 			isa = PBXGroup;
 			children = (
-				595FB1E727F35C3700E4E328 /* Habits */,
+				595FB20527FCF37500E4E328 /* HabitEdit */,
+				595FB1E727F35C3700E4E328 /* HabitsCollection */,
 				595FB1E827F35C4400E4E328 /* Info */,
 				595FB1ED27F3611F00E4E328 /* Common */,
+				595FB20627FCF45200E4E328 /* Model */,
 				595FB1D127F3495200E4E328 /* AppDelegate.swift */,
 				595FB1D327F3495200E4E328 /* SceneDelegate.swift */,
 				595FB1D527F3495200E4E328 /* ViewController.swift */,
@@ -79,13 +93,15 @@
 			path = MyHabits;
 			sourceTree = "<group>";
 		};
-		595FB1E727F35C3700E4E328 /* Habits */ = {
+		595FB1E727F35C3700E4E328 /* HabitsCollection */ = {
 			isa = PBXGroup;
 			children = (
 				595FB1E927F35CA300E4E328 /* HabitsViewController.swift */,
-				595FB1E527F34FFE00E4E328 /* HabitsStore.swift */,
+				595FB20227FCDF2E00E4E328 /* HabitsCollectionView.swift */,
+				595FB1FC27FA459000E4E328 /* HobitsCollectionViewCell.swift */,
+				595FB1FE27FB594700E4E328 /* HobitsProgressCollectionViewCell.swift */,
 			);
-			path = Habits;
+			path = HabitsCollection;
 			sourceTree = "<group>";
 		};
 		595FB1E827F35C4400E4E328 /* Info */ = {
@@ -104,6 +120,24 @@
 				595FB1F227F3936E00E4E328 /* Extentions.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		595FB20527FCF37500E4E328 /* HabitEdit */ = {
+			isa = PBXGroup;
+			children = (
+				595FB1F427F3BBA500E4E328 /* HabitEditViewController.swift */,
+				595FB20027FCD17400E4E328 /* HabitEditView.swift */,
+			);
+			path = HabitEdit;
+			sourceTree = "<group>";
+		};
+		595FB20627FCF45200E4E328 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				595FB1E527F34FFE00E4E328 /* HabitsStore.swift */,
+				595FB1FA27FA440300E4E328 /* Storage.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,14 +211,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				595FB1E627F34FFE00E4E328 /* HabitsStore.swift in Sources */,
+				595FB20327FCDF2E00E4E328 /* HabitsCollectionView.swift in Sources */,
 				595FB1D627F3495200E4E328 /* ViewController.swift in Sources */,
 				595FB1F127F391F600E4E328 /* InfoContentView.swift in Sources */,
+				595FB20127FCD17400E4E328 /* HabitEditView.swift in Sources */,
+				595FB1FD27FA459000E4E328 /* HobitsCollectionViewCell.swift in Sources */,
 				595FB1D227F3495200E4E328 /* AppDelegate.swift in Sources */,
 				595FB1EA27F35CA300E4E328 /* HabitsViewController.swift in Sources */,
 				595FB1EF27F3616800E4E328 /* Constants.swift in Sources */,
 				595FB1EC27F35CC700E4E328 /* InfoViewController.swift in Sources */,
+				595FB1F527F3BBA500E4E328 /* HabitEditViewController.swift in Sources */,
 				595FB1D427F3495200E4E328 /* SceneDelegate.swift in Sources */,
 				595FB1F327F3936E00E4E328 /* Extentions.swift in Sources */,
+				595FB1FB27FA440300E4E328 /* Storage.swift in Sources */,
+				595FB1FF27FB594700E4E328 /* HobitsProgressCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
