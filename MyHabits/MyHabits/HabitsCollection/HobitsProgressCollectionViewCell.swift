@@ -7,9 +7,23 @@
 
 import UIKit
 
-class HobitsProgressCollectionViewCell: UICollectionViewCell {
+final class HobitsProgressCollectionViewCell: UICollectionViewCell {
     
-    let happyLabel: UILabel = {
+    private var todayProgress: CGFloat = 0.00 {
+        didSet {
+            self.progressLabel.text = "\(String(Int(floor(self.todayProgress * 100))))%"
+            progressViewConstraint.isActive = false
+            progressViewConstraint = progressView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor,
+                                                                         multiplier: self.todayProgress,
+                                                                         constant: -24)
+            progressViewConstraint.isActive = true
+        }
+        
+    }
+    
+    private var progressViewConstraint: NSLayoutConstraint =  NSLayoutConstraint()
+    
+    private let happyLabel: UILabel = {
         let happyLabel = UILabel()
         happyLabel.backgroundColor = .white
         happyLabel.text = "Все получится!"
@@ -19,17 +33,17 @@ class HobitsProgressCollectionViewCell: UICollectionViewCell {
         return happyLabel
     }()
 
-    let progressLabel: UILabel = {
-        let nameLabel = UILabel()
-        nameLabel.backgroundColor = .white
-        nameLabel.text = "50%"
-        nameLabel.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
-        nameLabel.textColor = .systemGray
-        nameLabel.toAutoLayout()
-        return nameLabel
+    private let progressLabel: UILabel = {
+        let progressLabel = UILabel()
+        progressLabel.backgroundColor = .white
+        progressLabel.text = "50%"
+        progressLabel.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        progressLabel.textColor = .systemGray
+        progressLabel.toAutoLayout()
+        return progressLabel
     }()
 
-    let backgroudView: UIView = {
+    private let backgroudView: UIView = {
         let backgroudView = UIView()
         backgroudView.backgroundColor = .systemGray5
         backgroudView.layer.cornerRadius = 5
@@ -38,7 +52,7 @@ class HobitsProgressCollectionViewCell: UICollectionViewCell {
         return backgroudView
     }()
     
-    let progressView: UIView = {
+    private let progressView: UIView = {
         let progressView = UIView()
         progressView.backgroundColor = .purple
         progressView.layer.cornerRadius = 5
@@ -57,7 +71,6 @@ class HobitsProgressCollectionViewCell: UICollectionViewCell {
                                 progressLabel,
                                 backgroudView,
                                 progressView)
-        
         activateConstraints()
             
     }
@@ -70,12 +83,8 @@ class HobitsProgressCollectionViewCell: UICollectionViewCell {
 
 extension HobitsProgressCollectionViewCell {
     
-    public func setCellFromDataSet(_ hobitName: String,bk: UIColor) {
-        /*
-        self.nameLabel.text = hobitName
-        self.nameLabel.textColor = bk
-        imageTakenToday.tintColor = bk
-         */
+    public func setCellFromDataSet(_ progress: Float) {
+        self.todayProgress = CGFloat(progress)
     }
 
 }
@@ -87,12 +96,8 @@ extension HobitsProgressCollectionViewCell {
         NSLayoutConstraint.activate([
             happyLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor,constant: 10),
             happyLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 12),
-            //happyLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.7),
-            //nameLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -50),
-            //nameLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant: -20),
-            //nameLabel.heightAnchor.constraint(equalToConstant: 100),
             
-            progressLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor,constant: 20),
+            progressLabel.centerYAnchor.constraint(equalTo: happyLabel.centerYAnchor),
             progressLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant: -12),
             
             backgroudView.topAnchor.constraint(equalTo: happyLabel.bottomAnchor,constant: 10),
@@ -102,9 +107,7 @@ extension HobitsProgressCollectionViewCell {
 
             progressView.topAnchor.constraint(equalTo: happyLabel.bottomAnchor,constant: 10),
             progressView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 12),
-            progressView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.5 , constant: -24),
-            progressView.heightAnchor.constraint(equalToConstant: 7),
-            
+            progressView.heightAnchor.constraint(equalToConstant: 7)
         ])
     }
 }

@@ -33,3 +33,20 @@ public extension UIImage {
     }
 }
 
+
+///  Get view controller https://stackoverflow.com/questions/1372977/given-a-view-how-do-i-get-its-viewcontroller
+
+
+extension UIView {
+    var parentViewController: UIViewController? {
+        // Starts from next (As we know self is not a UIViewController).
+        var parentResponder: UIResponder? = self.next
+        while parentResponder != nil {
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+            parentResponder = parentResponder?.next
+        }
+        return nil
+    }
+}

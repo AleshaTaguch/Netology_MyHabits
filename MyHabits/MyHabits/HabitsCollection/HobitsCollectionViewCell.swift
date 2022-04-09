@@ -8,11 +8,41 @@
 import UIKit
 
 class HobitsCollectionViewCell: UICollectionViewCell {
+    
+    static let imageTakenTodayUncheck: UIImage? = UIImage(systemName: "circle")
+    static let imageTakenTodayCheck: UIImage? = UIImage(systemName: "checkmark.circle.fill")
+    
+    static let needUpdateCellNotification: String = "needUpdateCellNotification"
+    
+    private var habitFromCell: Habit? {
+        didSet {
+            if let habit = habitFromCell {
+                self.nameLabel.text = habit.name
+                self.nameLabel.textColor = habit.color
+                self.dateStringLabel.text = habit.dateString
+                
+                if habit.isAlreadyTakenToday {
+                    self.imageTakenToday.image = HobitsCollectionViewCell.imageTakenTodayCheck
+                } else {
+                    self.imageTakenToday.image = HobitsCollectionViewCell.imageTakenTodayUncheck
+                }
+                self.imageTakenToday.tintColor = habit.color
+                counterLabel.text = "Счетчик: \(habit.trackDates.count)"
+                
+            } else {
+                self.nameLabel.text = nil
+                self.nameLabel.textColor = nil
+                self.dateStringLabel.text = nil
+                self.imageTakenToday.image = nil
+                self.imageTakenToday.tintColor = nil
+                self.counterLabel.text = nil
+            }
+        }
+    }
 
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.backgroundColor = .white
-        nameLabel.text = "Наименование привычки Наименование привычки Наименование привычки Наименование привычки Наименование привычки"
         nameLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         nameLabel.textColor = .black
         nameLabel.numberOfLines = 2
@@ -20,25 +50,23 @@ class HobitsCollectionViewCell: UICollectionViewCell {
         return nameLabel
     }()
     
-    let dateStringLabel: UILabel = {
+    private let dateStringLabel: UILabel = {
         let dateStringLabel = UILabel()
         dateStringLabel.backgroundColor = .white
-        dateStringLabel.text = "Каждый день в 17:00"
         dateStringLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         dateStringLabel.textColor = .systemGray2
         dateStringLabel.toAutoLayout()
         return dateStringLabel
     }()
     
-    let imageTakenToday: UIImageView = {
+    private let imageTakenToday: UIImageView = {
         let imageTakenToday = UIImageView()
-        imageTakenToday.image = UIImage(systemName: "checkmark.circle.fill")
         imageTakenToday.tintColor = .black
         imageTakenToday.toAutoLayout()
         return imageTakenToday
     }()
     
-    let counterLabel: UILabel = {
+    private let counterLabel: UILabel = {
         let counterLabel = UILabel()
         counterLabel.backgroundColor = .white
         counterLabel.text = "Счетчик: 0"
@@ -47,9 +75,6 @@ class HobitsCollectionViewCell: UICollectionViewCell {
         counterLabel.toAutoLayout()
         return counterLabel
     }()
-    
-    //checkmark.circle.fill
-    //circle
         
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,9 +85,11 @@ class HobitsCollectionViewCell: UICollectionViewCell {
                                 dateStringLabel,
                                 imageTakenToday,
                                 counterLabel)
-        
         activateConstraints()
             
+        let tapImageTakenTodayGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapImageTakenToday(_:)))
+        imageTakenToday.isUserInteractionEnabled = true
+        imageTakenToday.addGestureRecognizer(tapImageTakenTodayGestureRecognizer)
     }
     
     required init?(coder: NSCoder) {
@@ -73,12 +100,29 @@ class HobitsCollectionViewCell: UICollectionViewCell {
 
 extension HobitsCollectionViewCell {
     
-    public func setCellFromDataSet(_ hobitName: String,bk: UIColor) {
-        self.nameLabel.text = hobitName
-        self.nameLabel.textColor = bk
-        imageTakenToday.tintColor = bk
+    @objc private func tapImageTakenToday(_ recognizer: UITapGestureRecognizer) {
+        if let habit = self.habitFromCell {
+            if habit.isAlreadyTakenToday {
+                store.untrack(habit)
+            } else {
+                store.track(habit)
+            }
+            let userInfoNatification: [String : Any] = ["HobitsCollectionViewCell": self]
+            let notificationCenter = NotificationCenter.default
+            notificationCenter.post(name: Notification.Name(HobitsCollectionViewCell.needUpdateCellNotification),
+                                    object: nil,
+                                    userInfo: userInfoNatification)
+            //HabitsStore.shared.track(habit)
+        }
+        return
     }
+}
 
+extension HobitsCollectionViewCell {
+    
+    public func setCellFromDataSet(_ habit: Habit) {
+        self.habitFromCell = habit
+    }
 }
 
 extension HobitsCollectionViewCell {
@@ -94,7 +138,6 @@ extension HobitsCollectionViewCell {
             dateStringLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.7),
             
             imageTakenToday.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            //imageTakenToday.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             imageTakenToday.widthAnchor.constraint(equalToConstant: 60),
             imageTakenToday.heightAnchor.constraint(equalToConstant: 60),
             imageTakenToday.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant: -20),

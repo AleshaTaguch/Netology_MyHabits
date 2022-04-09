@@ -1,30 +1,16 @@
-//
-//  HabitsCollectionView.swift
-//  MyHabits
-//
-//  Created by tertyshniy on 06.04.2022.
-//
-
 import UIKit
 
 class HabitsCollectionView: UIView {
+    
 
-    lazy var layuot: UICollectionViewFlowLayout = {
+    private lazy var layuot: UICollectionViewFlowLayout = {
         let layuot = UICollectionViewFlowLayout()
-        /*
-        layuot.sectionInset = UIEdgeInsets(top: Consts.HobitsCollection.topMargin,
-                                           left: Consts.HobitsCollection.leftMargin,
-                                           bottom: Consts.HobitsCollection.buttomMargin,
-                                           right: Consts.HobitsCollection.rightMargin)
-        */
-        
         layuot.minimumLineSpacing = Consts.HobitsCollection.lineSpacing
-        //layuot.minimumInteritemSpacing = Consts.HobitsCollection.interitemSpacing
         layuot.scrollDirection = .vertical
         return layuot
     }()
     
-    lazy var collectionView: UICollectionView = {
+    public lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layuot)
         collectionView.toAutoLayout()
         collectionView.dataSource = self
@@ -35,6 +21,7 @@ class HabitsCollectionView: UIView {
         collectionView.register(HobitsProgressCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: HobitsProgressCollectionViewCell.self))
         return collectionView
     }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,11 +40,11 @@ class HabitsCollectionView: UIView {
 
 extension HabitsCollectionView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         } else {
@@ -66,15 +53,15 @@ extension HabitsCollectionView: UICollectionViewDataSource, UICollectionViewDele
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if indexPath.section == 0 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HobitsProgressCollectionViewCell.self),
                                                                 for: indexPath) as? HobitsProgressCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            //cell.setCellFromDataSet(store.habits[indexPath.row].name,
-                                   // bk: store.habits[indexPath.row].color)
+            cell.setCellFromDataSet(store.todayProgress)
+            print("store.todayProgress= \(store.todayProgress)")
             return cell
             
         } else {
@@ -82,14 +69,13 @@ extension HabitsCollectionView: UICollectionViewDataSource, UICollectionViewDele
                                                                 for: indexPath) as? HobitsCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.setCellFromDataSet(store.habits[indexPath.row].name,
-                                    bk: store.habits[indexPath.row].color)
+            cell.setCellFromDataSet(store.habits[indexPath.row])
             return cell
         }
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var height: CGFloat
         let width: CGFloat = collectionView.frame.width-32
         
@@ -103,7 +89,7 @@ extension HabitsCollectionView: UICollectionViewDataSource, UICollectionViewDele
         return CGSize(width: width, height: height)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if section == 0 {
             return UIEdgeInsets(top: 22,
                                                left: Consts.HobitsCollection.leftMargin,

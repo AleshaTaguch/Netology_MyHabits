@@ -7,4 +7,4 @@
 
 import Foundation
 
-let store = HabitsStore.shared
+let store: HabitsStore = HabitsStore.shared

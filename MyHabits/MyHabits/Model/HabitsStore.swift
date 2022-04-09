@@ -208,3 +208,12 @@ private extension Date {
         return dates
     }
 }
+
+extension HabitsStore {
+    public func untrack(_ habit: Habit) {
+        if habit.isAlreadyTakenToday {
+            habit.trackDates.remove(at: habit.trackDates.count - 1)
+            save()
+        }
+    }
+}
