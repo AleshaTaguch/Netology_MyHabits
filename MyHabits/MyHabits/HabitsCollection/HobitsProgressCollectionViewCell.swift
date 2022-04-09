@@ -1,10 +1,3 @@
-//
-//  HobitsProgressCollectionViewCell.swift
-//  MyHabits
-//
-//  Created by tertyshniy on 04.04.2022.
-//
-
 import UIKit
 
 final class HobitsProgressCollectionViewCell: UICollectionViewCell {
@@ -36,7 +29,6 @@ final class HobitsProgressCollectionViewCell: UICollectionViewCell {
     private let progressLabel: UILabel = {
         let progressLabel = UILabel()
         progressLabel.backgroundColor = .white
-        progressLabel.text = "50%"
         progressLabel.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         progressLabel.textColor = .systemGray
         progressLabel.toAutoLayout()
@@ -84,7 +76,8 @@ final class HobitsProgressCollectionViewCell: UICollectionViewCell {
 extension HobitsProgressCollectionViewCell {
     
     public func setCellFromDataSet(_ progress: Float) {
-        self.todayProgress = CGFloat(progress)
+        self.todayProgress = CGFloat(floor(progress*100)/100)
+        print("HobitsProgressCollectionViewCell todayProgress= ", self.todayProgress)
     }
 
 }
@@ -99,7 +92,7 @@ extension HobitsProgressCollectionViewCell {
             
             progressLabel.centerYAnchor.constraint(equalTo: happyLabel.centerYAnchor),
             progressLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant: -12),
-            
+                    
             backgroudView.topAnchor.constraint(equalTo: happyLabel.bottomAnchor,constant: 10),
             backgroudView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 12),
             backgroudView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor,constant: -24),

@@ -15,9 +15,8 @@ class HabitsViewController: UIViewController {
         
         self.view.backgroundColor = .systemGray6
         self.title = Consts.TabPage.habitPageButtomTitle
-        //self.navigationItem.title = Consts.TabPage.habitPageButtomTitle
         self.navigationItem.largeTitleDisplayMode = .always
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(createNewHabit))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(showCreateHabitView))
         
         self.view.addSubviews(habitsCollectionView)
         activateConstraints()
@@ -28,50 +27,34 @@ class HabitsViewController: UIViewController {
         let notificationCenter = NotificationCenter.default
         // подписываемся на уведомления необходимости обновить ячейку 
         notificationCenter.addObserver(self, selector: #selector(updateCollectionCell), name: NSNotification.Name(HobitsCollectionViewCell.needUpdateCellNotification), object: nil)
+        // подписываемся на уведомления необходимости показать длелали привычки
+        notificationCenter.addObserver(self, selector: #selector(showdDetailView), name: NSNotification.Name(HobitsCollectionViewCell.showdDetailViewNotification), object: nil)
 
-        
-        //let store = HabitsStore.shared
-        //let h1 = Habit(name: "первая привычка", date: Date.init() , color: .blue)
-        print("-v-- store.habits -----")
-        store.habits.forEach{hb in print(hb.name,hb.trackDates)}
-        
-        // {habit in print(habit)}
-        print(store.habits) // распечатает список добавленных привычек
-        //store.habits.append(h1)
-        print("-^--- store.habits -----")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
-        habitsCollectionView.collectionView.reloadData()        
+        habitsCollectionView.collectionView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        //navigationController?.tabBarItem.title = Consts.TabPage.habitPageName
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-        
-        print("viewDidAppear")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.prefersLargeTitles = false
-        
     }
 
 }
 
 extension HabitsViewController {
     
-    @objc private func createNewHabit() {
+    @objc private func showCreateHabitView() {
         let habitEditViewController: HabitEditViewController = {
             let viewController = HabitEditViewController()
             viewController.editMode = .create
-            //viewController.title = "Создать"
             viewController.navigationItem.backButtonTitle = "Отмена"
             return viewController
         }()
@@ -80,9 +63,8 @@ extension HabitsViewController {
     
     
     @objc private func updateCollectionCell(notification: NSNotification) {
-         
         guard let viewCell = notification.userInfo?["HobitsCollectionViewCell"] as? HobitsCollectionViewCell else {
-           return
+            return
         }
         
         if let indexPath = habitsCollectionView.collectionView.indexPath(for: viewCell) {
@@ -91,6 +73,22 @@ extension HabitsViewController {
         habitsCollectionView.collectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
         
         
+    }
+    
+    @objc private func showdDetailView(notification: NSNotification) {
+        guard let habitFromCell = notification.userInfo?["habitFromCell"] as? Habit else {
+            return
+        }
+        
+        let habitDetailViewController: HabitDetailViewController = {
+            let viewController = HabitDetailViewController()
+            viewController.editHabit = habitFromCell
+            viewController.navigationItem.backButtonTitle = "Отмена"
+            return viewController
+        }()
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.pushViewController(habitDetailViewController, animated: true)
+
     }
 }
 

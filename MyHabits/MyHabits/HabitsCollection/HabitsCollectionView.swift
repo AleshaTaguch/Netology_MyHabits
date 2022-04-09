@@ -27,6 +27,9 @@ class HabitsCollectionView: UIView {
         super.init(frame: frame)
         
         self.backgroundColor = .systemGray6
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        
         self.addSubviews(collectionView)
         activateConstraints()
             
@@ -61,7 +64,7 @@ extension HabitsCollectionView: UICollectionViewDataSource, UICollectionViewDele
                 return UICollectionViewCell()
             }
             cell.setCellFromDataSet(store.todayProgress)
-            print("store.todayProgress= \(store.todayProgress)")
+            print("HabitsCollectionView todayProgress= \(store.todayProgress)")
             return cell
             
         } else {

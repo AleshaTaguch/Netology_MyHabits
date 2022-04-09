@@ -216,4 +216,9 @@ extension HabitsStore {
             save()
         }
     }
+    
+    public func remove(_ habit: Habit) {
+        habits.removeAll(where: {$0 == habit})
+    }
+
 }

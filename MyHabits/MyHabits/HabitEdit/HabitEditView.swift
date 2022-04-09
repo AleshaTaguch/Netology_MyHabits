@@ -3,6 +3,7 @@ import UIKit
 class HabitEditView: UIView {
     
     static let showColorPickerNotification: String = "showColorPickerNotification"
+    static let deleteHabitNotification: String = "deleteHabitNotification"
     
     public var editMode: HabitEditMode = .create {
         didSet {
@@ -96,7 +97,7 @@ class HabitEditView: UIView {
         let deleteButton = UIButton()
         deleteButton.setTitle("Удалить привычку", for: .normal)
         deleteButton.setTitleColor(.red, for: .normal)
-        //deleteButton.addTarget(self, action: #selector(setStatusButtonPressed), for: .touchUpInside)
+        deleteButton.addTarget(self, action: #selector(tapDeleteButton), for: .touchUpInside)
         deleteButton.toAutoLayout()
         return deleteButton
     }()
@@ -111,6 +112,8 @@ class HabitEditView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.lightGray.cgColor
         self.backgroundColor = .white
         
         self.addSubviews(nameLabel,
@@ -169,6 +172,13 @@ extension HabitEditView {
     @objc private func chageDatePicker() {
         timeValueLabel.text = dateFormatter.string(from: datePicker.date)//  getHabitFromField().dateString
     }
+    
+    @objc private func tapDeleteButton() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.post(name: Notification.Name(HabitEditView.deleteHabitNotification),
+                                object: nil)
+    }
+    
 }
 
 extension HabitEditView {

@@ -7,7 +7,7 @@ enum HabitEditMode: String{
 
 class HabitEditViewController: UIViewController {
     
-    var editMode: HabitEditMode = .create {
+    public var editMode: HabitEditMode = .create {
         didSet {
             title = self.editMode.rawValue
             habitEditView.editMode = self.editMode
@@ -17,13 +17,13 @@ class HabitEditViewController: UIViewController {
         }
     }
         
-    var editHabit: Habit? {
+    public var editHabit: Habit? {
         didSet {
             habitEditView.setFieldFromHabit(editHabit)
         }
     }
     
-    let habitEditView: HabitEditView = {
+    private let habitEditView: HabitEditView = {
         let habitEditView = HabitEditView()
         habitEditView.toAutoLayout()
         return habitEditView
@@ -43,7 +43,15 @@ class HabitEditViewController: UIViewController {
         
         let notificationCenter = NotificationCenter.default
         // подписываемся на уведомления необходимости обновить ячейку
-        notificationCenter.addObserver(self, selector: #selector(showColorPicker), name: NSNotification.Name(HabitEditView.showColorPickerNotification), object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(showColorPicker),
+                                       name: NSNotification.Name(HabitEditView.showColorPickerNotification),
+                                       object: nil)
+        
+        notificationCenter.addObserver(self,
+                                       selector: #selector(showDeleteHabitAlert),
+                                       name: NSNotification.Name(HabitEditView.deleteHabitNotification),
+                                       object: nil)
         
     }
 
@@ -63,12 +71,18 @@ class HabitEditViewController: UIViewController {
     
 }
 
-
 extension HabitEditViewController {
     
     @objc func saveHabit() {
         let habit = habitEditView.getHabitFromField()
-        store.habits.append(habit)
+        if editMode == .create {
+            store.habits.append(habit)
+        } else {
+            editHabit?.name = habit.name
+            editHabit?.date = habit.date
+            editHabit?.color = habit.color
+            store.save()
+        }
         navigationController?.popViewController(animated: true)
         return
     }
@@ -92,6 +106,36 @@ extension HabitEditViewController {
         present(colorPicketView, animated: true)
     }
     
+    @objc private func showDeleteHabitAlert(notification: NSNotification) {
+        
+        var nameHabit: String
+        if let name = editHabit?.name {
+            nameHabit = name
+        } else {
+            nameHabit = "Без имени"
+        }
+        
+        let alertViewController = UIAlertController(title: "Удалить привычку",
+                                                    message: "Вы хотите удалить привычку \n\(nameHabit)",
+                                                    preferredStyle: .alert)
+        let deleteAlert = UIAlertAction(title: "Удалить", style: .default, handler: (deleteHabit))
+        deleteAlert.setValue(UIColor.red, forKey: "titleTextColor")
+        let cancelAlert = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        
+        alertViewController.addAction(deleteAlert)
+        alertViewController.addAction(cancelAlert)
+        
+        self.present(alertViewController, animated: true, completion: nil)
+         
+    }
+    
+    func deleteHabit(_ alertAction: UIAlertAction) {
+        if let habit = editHabit {
+            store.remove(habit)
+            navigationController?.popToRootViewController(animated: true)
+        }
+    }
+
 }
 
 extension HabitEditViewController {

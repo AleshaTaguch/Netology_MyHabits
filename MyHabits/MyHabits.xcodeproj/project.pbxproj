@@ -24,6 +24,9 @@
 		595FB1FF27FB594700E4E328 /* HobitsProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB1FE27FB594700E4E328 /* HobitsProgressCollectionViewCell.swift */; };
 		595FB20127FCD17400E4E328 /* HabitEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB20027FCD17400E4E328 /* HabitEditView.swift */; };
 		595FB20327FCDF2E00E4E328 /* HabitsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB20227FCDF2E00E4E328 /* HabitsCollectionView.swift */; };
+		595FB2092801E21100E4E328 /* HabitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB2082801E21100E4E328 /* HabitDetailViewController.swift */; };
+		595FB20B2801EB9500E4E328 /* HabitDetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB20A2801EB9500E4E328 /* HabitDetailTableView.swift */; };
+		595FB20D2801EC2D00E4E328 /* HabitDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FB20C2801EC2D00E4E328 /* HabitDetailTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,9 @@
 		595FB1FE27FB594700E4E328 /* HobitsProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobitsProgressCollectionViewCell.swift; sourceTree = "<group>"; };
 		595FB20027FCD17400E4E328 /* HabitEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitEditView.swift; sourceTree = "<group>"; };
 		595FB20227FCDF2E00E4E328 /* HabitsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsCollectionView.swift; sourceTree = "<group>"; };
+		595FB2082801E21100E4E328 /* HabitDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailViewController.swift; sourceTree = "<group>"; };
+		595FB20A2801EB9500E4E328 /* HabitDetailTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailTableView.swift; sourceTree = "<group>"; };
+		595FB20C2801EC2D00E4E328 /* HabitDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				595FB20527FCF37500E4E328 /* HabitEdit */,
+				595FB2072801E10100E4E328 /* HabitDatail */,
 				595FB1E727F35C3700E4E328 /* HabitsCollection */,
 				595FB1E827F35C4400E4E328 /* Info */,
 				595FB1ED27F3611F00E4E328 /* Common */,
@@ -138,6 +145,16 @@
 				595FB1FA27FA440300E4E328 /* Storage.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		595FB2072801E10100E4E328 /* HabitDatail */ = {
+			isa = PBXGroup;
+			children = (
+				595FB2082801E21100E4E328 /* HabitDetailViewController.swift */,
+				595FB20A2801EB9500E4E328 /* HabitDetailTableView.swift */,
+				595FB20C2801EC2D00E4E328 /* HabitDetailTableViewCell.swift */,
+			);
+			path = HabitDatail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,9 +228,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				595FB1E627F34FFE00E4E328 /* HabitsStore.swift in Sources */,
+				595FB20D2801EC2D00E4E328 /* HabitDetailTableViewCell.swift in Sources */,
 				595FB20327FCDF2E00E4E328 /* HabitsCollectionView.swift in Sources */,
 				595FB1D627F3495200E4E328 /* ViewController.swift in Sources */,
 				595FB1F127F391F600E4E328 /* InfoContentView.swift in Sources */,
+				595FB2092801E21100E4E328 /* HabitDetailViewController.swift in Sources */,
+				595FB20B2801EB9500E4E328 /* HabitDetailTableView.swift in Sources */,
 				595FB20127FCD17400E4E328 /* HabitEditView.swift in Sources */,
 				595FB1FD27FA459000E4E328 /* HobitsCollectionViewCell.swift in Sources */,
 				595FB1D227F3495200E4E328 /* AppDelegate.swift in Sources */,

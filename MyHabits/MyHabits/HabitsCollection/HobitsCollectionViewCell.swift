@@ -13,6 +13,7 @@ class HobitsCollectionViewCell: UICollectionViewCell {
     static let imageTakenTodayCheck: UIImage? = UIImage(systemName: "checkmark.circle.fill")
     
     static let needUpdateCellNotification: String = "needUpdateCellNotification"
+    static let showdDetailViewNotification: String = "showdDetailViewNotification"
     
     private var habitFromCell: Habit? {
         didSet {
@@ -90,6 +91,11 @@ class HobitsCollectionViewCell: UICollectionViewCell {
         let tapImageTakenTodayGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapImageTakenToday(_:)))
         imageTakenToday.isUserInteractionEnabled = true
         imageTakenToday.addGestureRecognizer(tapImageTakenTodayGestureRecognizer)
+        
+        let tapContentViewGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapContentView(_:)))
+        tapContentViewGestureRecognizer.numberOfTapsRequired = 2
+        contentView.isUserInteractionEnabled = true
+        contentView.addGestureRecognizer(tapContentViewGestureRecognizer)
     }
     
     required init?(coder: NSCoder) {
@@ -114,8 +120,18 @@ extension HobitsCollectionViewCell {
                                     userInfo: userInfoNatification)
             //HabitsStore.shared.track(habit)
         }
-        return
     }
+    
+    @objc private func tapContentView(_ recognizer: UITapGestureRecognizer) {
+        if let habit = self.habitFromCell {
+            let userInfoNatification: [String : Any] = ["habitFromCell": habit]
+            let notificationCenter = NotificationCenter.default
+            notificationCenter.post(name: Notification.Name(HobitsCollectionViewCell.showdDetailViewNotification),
+                                    object: nil,
+                                    userInfo: userInfoNatification)
+        }
+    }
+    
 }
 
 extension HobitsCollectionViewCell {
