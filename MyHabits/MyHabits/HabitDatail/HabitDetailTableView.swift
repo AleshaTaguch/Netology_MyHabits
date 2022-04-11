@@ -10,7 +10,6 @@ class HabitDetailTableView: UIView {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.isScrollEnabled = true
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.backgroundColor = .systemGray6
         tableView.toAutoLayout()
         return tableView
     }()
@@ -18,10 +17,10 @@ class HabitDetailTableView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderWidth = Consts.Global.borderWidth
+        self.layer.borderColor = Consts.Global.borderColor
         
-        self.backgroundColor = .white
+        self.backgroundColor = Consts.ColorPalette.backgroundView
         self.addSubviews(tableView)
 
         activateConstraints()

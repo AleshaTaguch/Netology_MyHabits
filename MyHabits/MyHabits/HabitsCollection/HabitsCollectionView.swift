@@ -5,7 +5,7 @@ class HabitsCollectionView: UIView {
 
     private lazy var layuot: UICollectionViewFlowLayout = {
         let layuot = UICollectionViewFlowLayout()
-        layuot.minimumLineSpacing = Consts.HobitsCollection.lineSpacing
+        layuot.minimumLineSpacing = Consts.HabitsCollectionView.Margin.lineSpacing
         layuot.scrollDirection = .vertical
         return layuot
     }()
@@ -15,7 +15,7 @@ class HabitsCollectionView: UIView {
         collectionView.toAutoLayout()
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = .systemGray5
+        collectionView.backgroundColor = Consts.ColorPalette.backgroundViewController
         collectionView.register(HobitsCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: HobitsCollectionViewCell.self))
     
         collectionView.register(HobitsProgressCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: HobitsProgressCollectionViewCell.self))
@@ -26,9 +26,9 @@ class HabitsCollectionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = .systemGray6
-        self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.backgroundColor = Consts.ColorPalette.backgroundViewController
+        self.layer.borderWidth = Consts.Global.borderWidth
+        self.layer.borderColor = Consts.Global.borderColor
         
         self.addSubviews(collectionView)
         activateConstraints()
@@ -80,7 +80,8 @@ extension HabitsCollectionView: UICollectionViewDataSource, UICollectionViewDele
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var height: CGFloat
-        let width: CGFloat = collectionView.frame.width-32
+        let width: CGFloat = collectionView.frame.width - (Consts.HabitsCollectionView.Margin.left +
+                                                           Consts.HabitsCollectionView.Margin.right)
         
         if indexPath.section == 0 {
             height = 60
@@ -95,15 +96,15 @@ extension HabitsCollectionView: UICollectionViewDataSource, UICollectionViewDele
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if section == 0 {
             return UIEdgeInsets(top: 22,
-                                               left: Consts.HobitsCollection.leftMargin,
+                                left: Consts.HabitsCollectionView.Margin.left,
                                                bottom: 9,
-                                               right: Consts.HobitsCollection.rightMargin)
+                                               right: Consts.HabitsCollectionView.Margin.right)
 
         } else {
             return UIEdgeInsets(top: 9,
-                                               left: Consts.HobitsCollection.leftMargin,
+                                left: Consts.HabitsCollectionView.Margin.left,
                                                bottom: 12,
-                                               right: Consts.HobitsCollection.rightMargin)
+                                               right: Consts.HabitsCollectionView.Margin.right)
         }
         
     }
@@ -115,10 +116,10 @@ extension HabitsCollectionView {
     
     private func activateConstraints() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: self.topAnchor,constant: 16*0),
-            collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 16*0),
-            collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -16*0),
-            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: -16*0)
+            collectionView.topAnchor.constraint(equalTo: self.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
 }

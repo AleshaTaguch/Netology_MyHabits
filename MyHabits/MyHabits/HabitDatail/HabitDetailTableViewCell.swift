@@ -13,7 +13,7 @@ class HabitDetailTableViewCell: UITableViewCell {
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.locale = .init(identifier: "ru_RU")
+        formatter.locale = Consts.Global.localeIdentifier 
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         formatter.doesRelativeDateFormatting = true
@@ -22,8 +22,8 @@ class HabitDetailTableViewCell: UITableViewCell {
     
     private let dateItemLabel: UILabel = {
         let dateItemLabel = UILabel()
-        dateItemLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        dateItemLabel.textColor = .black
+        dateItemLabel.font = Consts.FontPalette.Body.font
+        dateItemLabel.textColor = Consts.FontPalette.Body.color
         dateItemLabel.numberOfLines = 1
         dateItemLabel.toAutoLayout()
         return dateItemLabel
@@ -72,9 +72,8 @@ extension HabitDetailTableViewCell {
     
     private func activateConstraints () {
         NSLayoutConstraint.activate([
-            dateItemLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor, constant: 0),
-            dateItemLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
-            //dateItemLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0)
+            dateItemLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            dateItemLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: Consts.HabitDetailTableViewCell.Margin.leading)
         ])
     }
 }

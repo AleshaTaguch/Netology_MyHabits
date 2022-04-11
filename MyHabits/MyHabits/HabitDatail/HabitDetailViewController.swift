@@ -17,7 +17,7 @@ class HabitDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .systemGray6
+        self.view.backgroundColor = Consts.ColorPalette.backgroundViewController
         self.view.addSubviews(habitDetailTableView)
         activateConstraints()
         

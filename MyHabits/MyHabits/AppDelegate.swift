@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var rootTabBarController: UITabBarController = {
         let rootTabBarController = UITabBarController()
         rootTabBarController.viewControllers = [self.habitsNavigationController,self.infoNavigationController]
-        rootTabBarController.tabBar.backgroundColor = .systemGray6
+        rootTabBarController.tabBar.backgroundColor = Consts.ColorPalette.backgroundTabBar
         rootTabBarController.tabBar.layer.borderWidth = 0.5
         rootTabBarController.tabBar.layer.borderColor = UIColor.lightGray.cgColor
         UITabBar.appearance().tintColor = UIColor.purple

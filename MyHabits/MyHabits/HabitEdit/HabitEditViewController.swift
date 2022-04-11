@@ -31,7 +31,7 @@ class HabitEditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = Consts.ColorPalette.backgroundViewController
         
         view.addSubviews(habitEditView)
         activateConstraints()
@@ -112,7 +112,7 @@ extension HabitEditViewController {
         if let name = editHabit?.name {
             nameHabit = name
         } else {
-            nameHabit = "Без имени"
+            nameHabit = Consts.HabitEditView.defaultHabitName
         }
         
         let alertViewController = UIAlertController(title: "Удалить привычку",

@@ -4,9 +4,9 @@ class InfoViewController: UIViewController {
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .white
-        scrollView.layer.borderWidth = 0.5
-        scrollView.layer.borderColor = UIColor.lightGray.cgColor
+        scrollView.backgroundColor = Consts.ColorPalette.backgroundView
+        scrollView.layer.borderWidth = Consts.Global.borderWidth
+        scrollView.layer.borderColor = Consts.Global.borderColor
         scrollView.isScrollEnabled = true
         
         scrollView.contentMode = .scaleToFill
@@ -23,7 +23,7 @@ class InfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .systemGray6
+        self.view.backgroundColor = Consts.ColorPalette.backgroundViewController
         self.title = Consts.TabPage.infoPageName
         
         self.view.addSubview(scrollView)

@@ -28,7 +28,7 @@ class HobitsCollectionViewCell: UICollectionViewCell {
                     self.imageTakenToday.image = HobitsCollectionViewCell.imageTakenTodayUncheck
                 }
                 self.imageTakenToday.tintColor = habit.color
-                counterLabel.text = "Счетчик: \(habit.trackDates.count)"
+                counterLabel.text = "\(Consts.HobitsCollectionViewCell.Caption.countField) \(habit.trackDates.count)"
                 
             } else {
                 self.nameLabel.text = nil
@@ -43,9 +43,8 @@ class HobitsCollectionViewCell: UICollectionViewCell {
 
     private let nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.backgroundColor = .white
-        nameLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        nameLabel.textColor = .black
+        nameLabel.font = Consts.FontPalette.Headline.font
+        nameLabel.textColor = Consts.FontPalette.Headline.color
         nameLabel.numberOfLines = 2
         nameLabel.toAutoLayout()
         return nameLabel
@@ -53,9 +52,8 @@ class HobitsCollectionViewCell: UICollectionViewCell {
     
     private let dateStringLabel: UILabel = {
         let dateStringLabel = UILabel()
-        dateStringLabel.backgroundColor = .white
-        dateStringLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        dateStringLabel.textColor = .systemGray2
+        dateStringLabel.font = Consts.FontPalette.Caption.font
+        dateStringLabel.textColor = Consts.FontPalette.Caption.color
         dateStringLabel.toAutoLayout()
         return dateStringLabel
     }()
@@ -69,10 +67,9 @@ class HobitsCollectionViewCell: UICollectionViewCell {
     
     private let counterLabel: UILabel = {
         let counterLabel = UILabel()
-        counterLabel.backgroundColor = .white
-        counterLabel.text = "Счетчик: 0"
-        counterLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        counterLabel.textColor = .systemGray
+        counterLabel.text = Consts.HobitsCollectionViewCell.Caption.countField
+        counterLabel.font = Consts.FontPalette.Footnote.font
+        counterLabel.textColor = Consts.FontPalette.Footnote.color
         counterLabel.toAutoLayout()
         return counterLabel
     }()
@@ -81,7 +78,7 @@ class HobitsCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.layer.cornerRadius = 8
         contentView.layer.masksToBounds = true
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = Consts.ColorPalette.backgroundView
         contentView.addSubviews(nameLabel,
                                 dateStringLabel,
                                 imageTakenToday,
@@ -146,21 +143,21 @@ extension HobitsCollectionViewCell {
     private func activateConstraints() {
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor,constant: 20),
-            nameLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 20),
-            nameLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.7),
+            nameLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: Consts.HobitsCollectionViewCell.Margin.leading),
+            nameLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: Consts.HobitsCollectionViewCell.Margin.widthMultiplier),
             
             dateStringLabel.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor,constant: 4),
-            dateStringLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 20),
-            dateStringLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.7),
+            dateStringLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: Consts.HobitsCollectionViewCell.Margin.leading),
+            dateStringLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: Consts.HobitsCollectionViewCell.Margin.widthMultiplier),
             
             imageTakenToday.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            imageTakenToday.widthAnchor.constraint(equalToConstant: 60),
-            imageTakenToday.heightAnchor.constraint(equalToConstant: 60),
+            imageTakenToday.widthAnchor.constraint(equalToConstant: Consts.HobitsCollectionViewCell.SizeItem.imageTakenToday),
+            imageTakenToday.heightAnchor.constraint(equalToConstant: Consts.HobitsCollectionViewCell.SizeItem.imageTakenToday),
             imageTakenToday.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant: -20),
             
             counterLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,constant: -20),
-            counterLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 20),
-            counterLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.7),
+            counterLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: Consts.HobitsCollectionViewCell.Margin.leading),
+            counterLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: Consts.HobitsCollectionViewCell.Margin.widthMultiplier),
         ])
     }
 }

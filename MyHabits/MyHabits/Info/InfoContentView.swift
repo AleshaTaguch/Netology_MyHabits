@@ -4,11 +4,10 @@ class InfoContentView: UIView {
     
     let titleLabel: UILabel = {
         let titleLabel = UILabel()
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        titleLabel.textColor = .black
-        titleLabel.backgroundColor = .white
+        titleLabel.font = Consts.FontPalette.Title3.font
+        titleLabel.textColor = Consts.FontPalette.Title3.color
         titleLabel.numberOfLines = 1
-        titleLabel.text = "Привычка за 21 день"
+        titleLabel.text = Consts.InfoContentView.Caption.title
         titleLabel.toAutoLayout()
         return titleLabel
     }()
@@ -16,11 +15,10 @@ class InfoContentView: UIView {
     
     let infoLabel: UILabel = {
         let infoLabel = UILabel()
-        infoLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        infoLabel.textColor = .black
-        infoLabel.backgroundColor = .white
+        infoLabel.font = Consts.FontPalette.Body.font
+        infoLabel.textColor = Consts.FontPalette.Body.color
         infoLabel.numberOfLines = 0
-        infoLabel.text = Consts.intoText
+        infoLabel.text = Consts.Global.intoText
         infoLabel.toAutoLayout()
         return infoLabel
     }()
@@ -28,7 +26,7 @@ class InfoContentView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = .white
+        self.backgroundColor = Consts.ColorPalette.backgroundView
         
         self.addSubviews(titleLabel,infoLabel)
         activateConstraints()
@@ -45,15 +43,15 @@ extension InfoContentView {
     
     private func activateConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 22),
-            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            titleLabel.heightAnchor.constraint(equalToConstant: 24),
+            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: Consts.InfoContentView.Margin.topTitle),
+            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Consts.InfoContentView.Margin.leading),
+            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Consts.InfoContentView.Margin.trailing),
+            titleLabel.heightAnchor.constraint(equalToConstant: Consts.InfoContentView.SizeItem.title),
             
-            infoLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
-            infoLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            infoLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            infoLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
+            infoLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Consts.InfoContentView.Margin.topInfo),
+            infoLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Consts.InfoContentView.Margin.leading),
+            infoLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Consts.InfoContentView.Margin.trailing),
+            infoLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: Consts.InfoContentView.Margin.bottom)
         ])
     }
 }

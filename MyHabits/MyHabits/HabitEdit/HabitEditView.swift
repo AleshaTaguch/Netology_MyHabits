@@ -13,71 +13,62 @@ class HabitEditView: UIView {
        
     private let nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.backgroundColor = .white
-        nameLabel.text = "НАЗВАНИЕ"
-        nameLabel.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
-        nameLabel.textColor = .black
+        nameLabel.text = Consts.HabitEditView.Caption.nameField
+        nameLabel.font = Consts.FontPalette.FootnoteStatus.font
+        nameLabel.textColor = Consts.FontPalette.FootnoteStatus.color
         nameLabel.toAutoLayout()
         return nameLabel
     }()
     
     private let nameTextField: UITextField = {
         let nameTextField = UITextField()
-        nameTextField.backgroundColor = .white
-        nameTextField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        nameTextField.textColor = .blue
-        nameTextField.placeholder = "Бегать по утрам, спать 8 часов и т.п."
+        nameTextField.font = Consts.FontPalette.Headline.font
+        nameTextField.textColor = Consts.FontPalette.Headline.color
+        nameTextField.placeholder = Consts.HabitEditView.placeholderNameField
         nameTextField.toAutoLayout()
         return nameTextField
     }()
   
     private let colorLabel: UILabel = {
         let colorLabel = UILabel()
-        colorLabel.backgroundColor = .white
-        colorLabel.text = "ЦВЕТ"
-        colorLabel.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
-        colorLabel.textColor = .black
+        colorLabel.text = Consts.HabitEditView.Caption.colorField
+        colorLabel.font = Consts.FontPalette.FootnoteStatus.font
+        colorLabel.textColor = Consts.FontPalette.FootnoteStatus.color
         colorLabel.toAutoLayout()
         return colorLabel
     }()
     
     private let colorView: UIView = {
         let colorView = UIView()
-        colorView.backgroundColor = .orange
-        colorView.layer.cornerRadius = 30 / 2
+        colorView.backgroundColor = Consts.ColorPalette.defaultHabitColor
+        colorView.layer.cornerRadius = Consts.HabitEditView.SizeItem.colorView / 2
         colorView.layer.masksToBounds = true
-        //colorView.layer.borderWidth = 0.5
-        //colorView.layer.borderColor = UIColor.lightGray.cgColor
         colorView.toAutoLayout()
         return colorView
     }()
     
     private let timeLabel: UILabel = {
         let timeLabel = UILabel()
-        timeLabel.backgroundColor = .white
-        timeLabel.text = "ВРЕМЯ"
-        timeLabel.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
-        timeLabel.textColor = .black
+        timeLabel.text = Consts.HabitEditView.Caption.timeField
+        timeLabel.font = Consts.FontPalette.FootnoteStatus.font
+        timeLabel.textColor = Consts.FontPalette.FootnoteStatus.color
         timeLabel.toAutoLayout()
         return timeLabel
     }()
 
     private let timeTextLabel: UILabel = {
         let timeTextLabel = UILabel()
-        timeTextLabel.backgroundColor = .white
-        timeTextLabel.text = "Каждый день в "
-        timeTextLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        timeTextLabel.textColor = .black
+        timeTextLabel.text = Consts.HabitEditView.Caption.timeFieldPrefix
+        timeTextLabel.font = Consts.FontPalette.Body.font
+        timeTextLabel.textColor = Consts.FontPalette.Body.color
         timeTextLabel.toAutoLayout()
         return timeTextLabel
     }()
     
     private let timeValueLabel: UILabel = {
         let timeValueLabel = UILabel()
-        timeValueLabel.backgroundColor = .white
-        timeValueLabel.text = "11:00 PM"
-        timeValueLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        timeValueLabel.textColor = .blue
+        timeValueLabel.font = Consts.FontPalette.Body.font
+        timeValueLabel.textColor = .purple
         timeValueLabel.toAutoLayout()
         return timeValueLabel
     }()
@@ -89,7 +80,7 @@ class HabitEditView: UIView {
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.addTarget(self, action:  #selector(chageDatePicker), for: .valueChanged)
         datePicker.toAutoLayout()
-        datePicker.locale = Locale(identifier: "ru_RU")
+        datePicker.locale = Consts.Global.localeIdentifier
         return datePicker
     }()
     
@@ -104,7 +95,7 @@ class HabitEditView: UIView {
 
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ru_RU")
+        formatter.locale = Consts.Global.localeIdentifier
         formatter.timeStyle = .short
         return formatter
     }()
@@ -112,9 +103,9 @@ class HabitEditView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.lightGray.cgColor
-        self.backgroundColor = .white
+        self.layer.borderWidth = Consts.Global.borderWidth
+        self.layer.borderColor = Consts.Global.borderColor
+        self.backgroundColor = Consts.ColorPalette.backgroundView
         
         self.addSubviews(nameLabel,
                          nameTextField,
@@ -151,16 +142,16 @@ extension HabitEditView {
 
         } else {
             nameTextField.text = nil
-            colorView.backgroundColor = UIColor.orange
+            colorView.backgroundColor = Consts.ColorPalette.defaultHabitColor
             datePicker.date = Date.init()
         }
         chageDatePicker()
     }
     
     public func getHabitFromField() -> Habit {
-        let nameForSave: String = nameTextField.text ??  "no name"
+        let nameForSave: String = nameTextField.text ??  Consts.HabitEditView.defaultHabitName
         let dateForSave: Date  = datePicker.date
-        let colorForSave: UIColor = colorView.backgroundColor ?? UIColor.orange
+        let colorForSave: UIColor = colorView.backgroundColor ?? Consts.ColorPalette.defaultHabitColor
         
         return Habit(name: nameForSave, date: dateForSave, color: colorForSave)
     }
@@ -170,7 +161,7 @@ extension HabitEditView {
 extension HabitEditView {
     
     @objc private func chageDatePicker() {
-        timeValueLabel.text = dateFormatter.string(from: datePicker.date)//  getHabitFromField().dateString
+        timeValueLabel.text = dateFormatter.string(from: datePicker.date)
     }
     
     @objc private func tapDeleteButton() {
@@ -186,35 +177,35 @@ extension HabitEditView {
     private func activateConstraints() {
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 21),
-            nameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            nameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Consts.HabitEditView.Margin.leading),
             
             nameTextField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 7),
-            nameTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            nameTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            nameTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Consts.HabitEditView.Margin.leading),
+            nameTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Consts.HabitEditView.Margin.trailing),
             
             colorLabel.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 15),
-            colorLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            colorLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Consts.HabitEditView.Margin.leading),
             
             colorView.topAnchor.constraint(equalTo: colorLabel.bottomAnchor, constant: 7),
-            colorView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            colorView.widthAnchor.constraint(equalToConstant: 30),
-            colorView.heightAnchor.constraint(equalToConstant: 30),
+            colorView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Consts.HabitEditView.Margin.leading),
+            colorView.widthAnchor.constraint(equalToConstant: Consts.HabitEditView.SizeItem.colorView),
+            colorView.heightAnchor.constraint(equalToConstant: Consts.HabitEditView.SizeItem.colorView),
             
             timeLabel.topAnchor.constraint(equalTo: colorView.bottomAnchor, constant: 15),
-            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            timeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Consts.HabitEditView.Margin.leading),
             
             timeTextLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 15),
-            timeTextLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            timeTextLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Consts.HabitEditView.Margin.leading),
             
-            timeValueLabel.centerYAnchor.constraint(equalTo: timeTextLabel.centerYAnchor, constant: 0),
-            timeValueLabel.leadingAnchor.constraint(equalTo: timeTextLabel.trailingAnchor, constant: 0),
-            timeValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            timeValueLabel.centerYAnchor.constraint(equalTo: timeTextLabel.centerYAnchor),
+            timeValueLabel.leadingAnchor.constraint(equalTo: timeTextLabel.trailingAnchor),
+            timeValueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Consts.HabitEditView.Margin.trailing),
             
   
             datePicker.topAnchor.constraint(equalTo: timeTextLabel.bottomAnchor, constant: 15),
-            datePicker.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            datePicker.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            datePicker.heightAnchor.constraint(equalToConstant: 216),
+            datePicker.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Consts.HabitEditView.Margin.leading),
+            datePicker.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Consts.HabitEditView.Margin.trailing),
+            datePicker.heightAnchor.constraint(equalToConstant: Consts.HabitEditView.SizeItem.datePicker),
             
             deleteButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             deleteButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -18)

@@ -13,7 +13,8 @@ class HabitsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .systemGray6
+        self.view.backgroundColor = Consts.ColorPalette.backgroundViewController
+        
         self.title = Consts.TabPage.habitPageButtomTitle
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(showCreateHabitView))
