@@ -51,7 +51,8 @@ extension HabitsCollectionView: UICollectionViewDataSource, UICollectionViewDele
         if section == 0 {
             return 1
         } else {
-            return store.habits.count
+            //return store.habits.count
+            return HabitsStore.shared.habits.count
         }
         
     }
@@ -63,7 +64,8 @@ extension HabitsCollectionView: UICollectionViewDataSource, UICollectionViewDele
                                                                 for: indexPath) as? HobitsProgressCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.setCellFromDataSet(store.todayProgress)
+            //cell.setCellFromDataSet(store.todayProgress)
+            cell.setCellFromDataSet(HabitsStore.shared.todayProgress)
             return cell
             
         } else {
@@ -71,7 +73,8 @@ extension HabitsCollectionView: UICollectionViewDataSource, UICollectionViewDele
                                                                 for: indexPath) as? HobitsCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.setCellFromDataSet(store.habits[indexPath.row])
+            //cell.setCellFromDataSet(store.habits[indexPath.row])
+            cell.setCellFromDataSet(HabitsStore.shared.habits[indexPath.row])
             return cell
         }
     }

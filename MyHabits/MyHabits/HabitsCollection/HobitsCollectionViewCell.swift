@@ -99,9 +99,11 @@ extension HobitsCollectionViewCell {
     @objc private func tapImageTakenToday(_ recognizer: UITapGestureRecognizer) {
         if let habit = self.habitFromCell {
             if habit.isAlreadyTakenToday {
-                store.untrack(habit)
+                //store.untrack(habit)
+                HabitsStore.shared.untrack(habit)
             } else {
-                store.track(habit)
+                //store.track(habit)
+                HabitsStore.shared.track(habit)
             }
             let userInfoNatification: [String : Any] = ["HobitsCollectionViewCell": self]
             let notificationCenter = NotificationCenter.default

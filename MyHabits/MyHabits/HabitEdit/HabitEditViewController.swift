@@ -76,12 +76,14 @@ extension HabitEditViewController {
     @objc func saveHabit() {
         let habit = habitEditView.getHabitFromField()
         if editMode == .create {
-            store.habits.append(habit)
+            //store.habits.append(habit)
+            HabitsStore.shared.habits.append(habit)
         } else {
             editHabit?.name = habit.name
             editHabit?.date = habit.date
             editHabit?.color = habit.color
-            store.save()
+            //store.save()
+            HabitsStore.shared.save()
         }
         navigationController?.popViewController(animated: true)
         return
@@ -131,7 +133,8 @@ extension HabitEditViewController {
     
     func deleteHabit(_ alertAction: UIAlertAction) {
         if let habit = editHabit {
-            store.remove(habit)
+            //store.remove(habit)
+            HabitsStore.shared.remove(habit)
             navigationController?.popToRootViewController(animated: true)
         }
     }

@@ -52,7 +52,8 @@ extension HabitDetailTableViewCell {
     
     public func setCellFromDataSet(habit: Habit, date: Date) {
         self.dateItemLabel.text = dateFormatter.string(from: date)
-        if store.habit(habit, isTrackedIn: date) {
+        //if store.habit(habit, isTrackedIn: date) {
+        if HabitsStore.shared.habit(habit, isTrackedIn: date) {
             self.accessoryType = .checkmark
         } else {
             self.accessoryType = .none

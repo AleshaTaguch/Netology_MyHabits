@@ -4,7 +4,8 @@ class HabitDetailTableView: UIView {
 
     public var editHabit: Habit?
     
-    let habitDatesArray: [Date] = store.dates.sorted{ $0 > $1 }
+    //let habitDatesArray: [Date] = store.dates.sorted{ $0 > $1 }
+    let habitDatesArray: [Date] = HabitsStore.shared.dates.sorted{ $0 > $1 }
         
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
