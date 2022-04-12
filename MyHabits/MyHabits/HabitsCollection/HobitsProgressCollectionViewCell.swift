@@ -75,7 +75,6 @@ extension HobitsProgressCollectionViewCell {
     
     public func setCellFromDataSet(_ progress: Float) {
         self.todayProgress = CGFloat(floor(progress*100)/100)
-        print("HobitsProgressCollectionViewCell todayProgress= ", self.todayProgress)
     }
 
 }

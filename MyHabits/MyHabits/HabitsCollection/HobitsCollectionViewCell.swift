@@ -1,10 +1,3 @@
-//
-//  HobitsCollectionViewCell.swift
-//  MyHabits
-//
-//  Created by tertyshniy on 04.04.2022.
-//
-
 import UIKit
 
 class HobitsCollectionViewCell: UICollectionViewCell {

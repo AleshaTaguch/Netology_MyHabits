@@ -240,7 +240,6 @@ extension HabitEditView: UIColorPickerViewControllerDelegate {
     public func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         let colorSelect = viewController.selectedColor
         colorView.backgroundColor = colorSelect
-        print("colorSelect=",colorSelect)
     }
     
     

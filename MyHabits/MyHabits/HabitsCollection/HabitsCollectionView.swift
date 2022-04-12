@@ -64,7 +64,6 @@ extension HabitsCollectionView: UICollectionViewDataSource, UICollectionViewDele
                 return UICollectionViewCell()
             }
             cell.setCellFromDataSet(store.todayProgress)
-            print("HabitsCollectionView todayProgress= \(store.todayProgress)")
             return cell
             
         } else {

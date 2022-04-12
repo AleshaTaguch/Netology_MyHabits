@@ -21,7 +21,6 @@ public extension UIStackView {
 }
 
 /// UIImage alpha https://stackoverflow.com/questions/28517866/how-to-set-the-alpha-of-an-uiimage-in-swift-programmatically
-
 public extension UIImage {
 
     func alpha(_ value:CGFloat) -> UIImage {
@@ -35,8 +34,6 @@ public extension UIImage {
 
 
 ///  Get view controller https://stackoverflow.com/questions/1372977/given-a-view-how-do-i-get-its-viewcontroller
-
-
 extension UIView {
     var parentViewController: UIViewController? {
         // Starts from next (As we know self is not a UIViewController).
