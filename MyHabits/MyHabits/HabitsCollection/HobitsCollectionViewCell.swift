@@ -8,7 +8,7 @@ class HobitsCollectionViewCell: UICollectionViewCell {
     static let needUpdateCellNotification: String = "needUpdateCellNotification"
     static let showdDetailViewNotification: String = "showdDetailViewNotification"
     
-    private var habitFromCell: Habit? {
+    public var habitFromCell: Habit? {
         didSet {
             if let habit = habitFromCell {
                 self.nameLabel.text = habit.name
@@ -82,10 +82,12 @@ class HobitsCollectionViewCell: UICollectionViewCell {
         imageTakenToday.isUserInteractionEnabled = true
         imageTakenToday.addGestureRecognizer(tapImageTakenTodayGestureRecognizer)
         
+        /* Закомментировано двойное нажатие на ячейку
         let tapContentViewGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapContentView(_:)))
         tapContentViewGestureRecognizer.numberOfTapsRequired = 2
         contentView.isUserInteractionEnabled = true
         contentView.addGestureRecognizer(tapContentViewGestureRecognizer)
+        */
     }
     
     required init?(coder: NSCoder) {
@@ -110,9 +112,9 @@ extension HobitsCollectionViewCell {
             notificationCenter.post(name: Notification.Name(HobitsCollectionViewCell.needUpdateCellNotification),
                                     object: nil,
                                     userInfo: userInfoNatification)
-            //HabitsStore.shared.track(habit)
         }
     }
+   
     
     @objc private func tapContentView(_ recognizer: UITapGestureRecognizer) {
         if let habit = self.habitFromCell {
@@ -124,6 +126,7 @@ extension HobitsCollectionViewCell {
         }
     }
     
+    
 }
 
 extension HobitsCollectionViewCell {
@@ -131,6 +134,7 @@ extension HobitsCollectionViewCell {
     public func setCellFromDataSet(_ habit: Habit) {
         self.habitFromCell = habit
     }
+    
 }
 
 extension HobitsCollectionViewCell {

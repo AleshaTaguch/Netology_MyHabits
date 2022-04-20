@@ -36,18 +36,8 @@ class HabitsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         habitsCollectionView.collectionView.reloadData()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = false
-    }
-
 }
 
 extension HabitsViewController {
@@ -59,7 +49,14 @@ extension HabitsViewController {
             viewController.navigationItem.backButtonTitle = "Отмена"
             return viewController
         }()
-        navigationController?.pushViewController(habitEditViewController, animated: true)
+        
+        let editNavigationController: UINavigationController = {
+            let editNavigationController = UINavigationController()
+            editNavigationController.modalPresentationStyle = .fullScreen
+            editNavigationController.setViewControllers([habitEditViewController], animated: true)
+            return editNavigationController
+        }()
+        present(editNavigationController, animated: true)
     }
     
     
@@ -72,7 +69,6 @@ extension HabitsViewController {
             habitsCollectionView.collectionView.reloadItems(at: [indexPath])
         }
         habitsCollectionView.collectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
-        
         
     }
     
@@ -87,7 +83,7 @@ extension HabitsViewController {
             viewController.navigationItem.backButtonTitle = "Отмена"
             return viewController
         }()
-        navigationController?.navigationBar.prefersLargeTitles = false
+
         navigationController?.pushViewController(habitDetailViewController, animated: true)
 
     }

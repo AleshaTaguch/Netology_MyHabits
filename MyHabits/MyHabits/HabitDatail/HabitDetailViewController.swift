@@ -19,28 +19,28 @@ class HabitDetailViewController: UIViewController {
         
         self.view.backgroundColor = Consts.ColorPalette.backgroundViewController
         self.view.addSubviews(habitDetailTableView)
-        activateConstraints()
+        //activateConstraints()
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Править", style: .plain, target: self, action: #selector(showEditHabitView))
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
+        // проверяем удалена или нет привычка из массива
+        guard let habit = editHabit, let _ = HabitsStore.shared.habits.first(where:  {$0 == habit}) else {
+            navigationController?.popViewController(animated: true)
+            return
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = false
         if let habit = editHabit {
             self.title = habit.name
         }
-        
-        navigationController?.navigationBar.prefersLargeTitles = false
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-
+        activateConstraints()
     }
     
 }
@@ -55,7 +55,14 @@ extension HabitDetailViewController {
             viewController.navigationItem.backButtonTitle = "Отмена"
             return viewController
         }()
-        navigationController?.pushViewController(habitEditViewController, animated: true)
+        let editNavigationController: UINavigationController = {
+            let editNavigationController = UINavigationController()
+            editNavigationController.modalPresentationStyle = .fullScreen
+            editNavigationController.setViewControllers([habitEditViewController], animated: true)
+            return editNavigationController
+        }()
+        present(editNavigationController, animated: true)
+
     }
     
 }

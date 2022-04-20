@@ -52,23 +52,7 @@ class HabitEditViewController: UIViewController {
                                        selector: #selector(showDeleteHabitAlert),
                                        name: NSNotification.Name(HabitEditView.deleteHabitNotification),
                                        object: nil)
-        
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        navigationController?.navigationBar.prefersLargeTitles = false
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-       navigationController?.navigationBar.prefersLargeTitles = true
-
-    }
-    
 }
 
 extension HabitEditViewController {
@@ -85,13 +69,11 @@ extension HabitEditViewController {
             //store.save()
             HabitsStore.shared.save()
         }
-        navigationController?.popViewController(animated: true)
-        return
+        canselHabit()
     }
     
     @objc func canselHabit() {
-        navigationController?.popViewController(animated: true)
-        return
+        dismiss(animated: true)
     }
 
     @objc private func showColorPicker(notification: NSNotification) {
@@ -126,7 +108,7 @@ extension HabitEditViewController {
         
         alertViewController.addAction(deleteAlert)
         alertViewController.addAction(cancelAlert)
-        
+                
         self.present(alertViewController, animated: true, completion: nil)
          
     }
@@ -135,7 +117,12 @@ extension HabitEditViewController {
         if let habit = editHabit {
             //store.remove(habit)
             HabitsStore.shared.remove(habit)
-            navigationController?.popToRootViewController(animated: true)
+            dismiss(animated: true) //{
+                //self.editHabit = nil
+                //self.parent. .navigationController?.popViewController(animated: true)
+            //}
+            //dismiss(animated: true, completion: { navigationController?.popToRootViewController(animated: true)  })
+            //navigationController?.popToRootViewController(animated: true)
         }
     }
 

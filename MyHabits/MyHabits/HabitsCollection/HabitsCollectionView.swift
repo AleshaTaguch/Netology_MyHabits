@@ -110,8 +110,21 @@ extension HabitsCollectionView: UICollectionViewDataSource, UICollectionViewDele
         }
         
     }
-     
-     
+   
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section != 0 {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? HobitsCollectionViewCell else { return }
+            
+            if let habit = cell.habitFromCell {
+                let userInfoNatification: [String : Any] = ["habitFromCell": habit]
+                let notificationCenter = NotificationCenter.default
+                notificationCenter.post(name: Notification.Name(HobitsCollectionViewCell.showdDetailViewNotification),
+                                        object: nil,
+                                        userInfo: userInfoNatification)
+            }
+        }
+    }
+    
 }
 
 extension HabitsCollectionView {
